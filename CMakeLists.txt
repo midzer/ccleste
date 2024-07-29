@@ -11,7 +11,7 @@ option(BUILD_FOR_NOKIA_NGAGE      "Build for the Nokia N-Gage"                  
 option(NGAGE_DEBUG                "Enable Nokia N-Gage specific adjustments"             OFF)
 option(CELESTE_P8_FIXEDP          "Use fixed-point arithmetic"                           OFF)
 option(CELESTE_P8_HACKED_BALLOONS "Always expand the baloon hitbox to their full range." OFF)
-option(CELESTE_P8_ENABLE_AUDIO    "Enable SDL2_mixer audio output."                      OFF)
+option(CELESTE_P8_ENABLE_AUDIO    "Enable SDL2_mixer audio output."                      ON)
 
 if(BUILD_FOR_NOKIA_NGAGE)
   include(Nokia_N-Gage)
@@ -30,8 +30,10 @@ include(get_SDL2)
 get_SDL2("2.26.0")
 
 if(NOT BUILD_FOR_NOKIA_NGAGE AND NOT PSP AND CELESTE_P8_ENABLE_AUDIO)
-  get_SDL2_mixer("2.6.2")
+  #get_SDL2_mixer("2.6.2")
 endif()
+
+add_compile_options(-flto -O3 -fno-rtti -fno-exceptions)
 
 set(GUI_TYPE "")
 
